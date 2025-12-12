@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How This Was Made - Mom's Recipes</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .about-container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .about-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .about-header h1 {
+      color: var(--brown);
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    
+    .about-header .subtitle {
+      color: var(--brown-muted);
+      font-style: italic;
+    }
+    
+    .story-section {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 15px rgba(92, 64, 51, 0.1);
+    }
+    
+    .story-section h2 {
+      color: var(--brown);
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .story-section p {
+      color: var(--brown-text);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    
+    .story-section p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .diagram {
+      background: linear-gradient(135deg, #faf7f2 0%, #f5ede3 100%);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 16px 0;
+      text-align: center;
+    }
+    
+    .diagram-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .diagram-step {
+      background: var(--white);
+      border: 2px solid var(--brown-light);
+      border-radius: var(--radius-md);
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      color: var(--brown);
+      max-width: 280px;
+      width: 100%;
+    }
+    
+    .diagram-arrow {
+      color: var(--brown-light);
+      font-size: 1.5rem;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-left: 4px solid var(--green);
+      padding: 16px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 16px 0;
+    }
+    
+    .highlight-box p {
+      margin: 0;
+      color: #2e7d32;
+    }
+    
+    .fun-fact {
+      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin: 16px 0;
+      border-left: 4px solid var(--gold);
+    }
+    
+    .fun-fact strong {
+      color: #f57c00;
+    }
+    
+    .signature {
+      text-align: center;
+      padding: 24px;
+      color: var(--brown-muted);
+      font-style: italic;
+    }
+    
+    .signature .heart {
+      color: var(--red);
+      font-size: 1.3rem;
+    }
+    
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="about-container">
+    
+    <a href="index.html" class="back-link">← Back to Recipes</a>
+    
+    <div class="about-header">
+      <h1>✨ How This Was Made</h1>
+      <p class="subtitle">A little story about your recipe app</p>
+    </div>
+    
+    <!-- Section 1: The Short Version -->
+    <div class="story-section">
+      <h2>📖 The Short Version</h2>
+      <p>
+        Kyle built this recipe app for you in about <strong>one afternoon</strong> — 
+        not by writing thousands of lines of computer code by hand, but by 
+        <em>having a conversation</em> with an AI assistant named Claude.
+      </p>
+      <p>
+        He described what he wanted ("a recipe app for my mom where she can 
+        upload photos of her handwritten recipe cards"), and Claude helped 
+        write all the code, piece by piece.
+      </p>
+    </div>
+    
+    <!-- Section 2: What is AI? -->
+    <div class="story-section">
+      <h2>🤖 What is This "AI" Thing?</h2>
+      <p>
+        AI stands for "Artificial Intelligence." Think of it like a very 
+        well-read assistant who has studied millions of books, websites, 
+        and computer programs.
+      </p>
+      <p>
+        When you upload a photo of one of your handwritten recipe cards, 
+        the AI <em>looks</em> at the image and reads your cursive handwriting — 
+        something that was nearly impossible for computers just a few years ago!
+      </p>
+      
+      <div class="fun-fact">
+        <strong>Fun fact:</strong> The AI (Claude) was made by a company called 
+        Anthropic. It learned to read by studying billions of pages of text, 
+        including old handwritten documents, letters, and recipe cards just like yours!
+      </div>
+    </div>
+    
+    <!-- Section 3: How It Works -->
+    <div class="story-section">
+      <h2>🔧 How Your Recipe App Works</h2>
+      <p>Here's what happens when you add a new recipe:</p>
+      
+      <div class="diagram">
+        <div class="diagram-flow">
+          <div class="diagram-step">📸 You take a photo of a recipe card</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step">🤖 AI reads your handwriting</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step">📝 Ingredients & steps are extracted</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step">💾 Saved to an online database</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step">📱 Appears in your recipe collection!</div>
+        </div>
+      </div>
+      
+      <p>
+        The recipes are stored safely on the internet (in something called 
+        "the cloud"), so you can access them from your phone, tablet, or 
+        any computer — they're always there!
+      </p>
+    </div>
+    
+    <!-- Section 4: Vibe Coding -->
+    <div class="story-section">
+      <h2>💬 "Vibe Coding" — A New Way to Build</h2>
+      <p>
+        Kyle used a tool called <strong>Cursor</strong>, which is like a 
+        smart notepad for programmers. But here's the twist: instead of 
+        typing code himself, he typed messages like:
+      </p>
+      
+      <div class="highlight-box">
+        <p>
+          "Make the colors warm and cozy, like a grandma's kitchen. 
+          Add a PIN so only family can see the recipes."
+        </p>
+      </div>
+      
+      <p>
+        The AI understood these instructions and wrote the actual computer 
+        code. Kyle would check the result, suggest changes ("make the text 
+        bigger for easier reading"), and the AI would update it.
+      </p>
+      <p>
+        This back-and-forth conversation is sometimes called <strong>"vibe coding"</strong> — 
+        you describe the <em>vibe</em> you want, and the AI figures out the details!
+      </p>
+    </div>
+    
+    <!-- Section 5: What Makes This Special -->
+    <div class="story-section">
+      <h2>💝 What Makes This Special</h2>
+      <p>
+        A few years ago, building something like this would have taken 
+        a professional programmer <strong>weeks or months</strong>. The hardest 
+        part — reading handwritten cursive — might not have worked at all!
+      </p>
+      <p>
+        Today, with AI assistance, Kyle was able to build this in a single 
+        afternoon, complete with:
+      </p>
+      <ul style="color: var(--brown-text); line-height: 1.8; margin-left: 20px;">
+        <li>A beautiful, easy-to-read design</li>
+        <li>The ability to read your handwritten cards</li>
+        <li>A shopping list that combines ingredients</li>
+        <li>Categories to organize everything</li>
+        <li>A secret PIN so it's just for family</li>
+      </ul>
+      <p>
+        All because he wanted you to have your treasured recipes in one 
+        easy place, accessible from your phone anytime. 💛
+      </p>
+    </div>
+    
+    <!-- Section 6: The Tools -->
+    <div class="story-section">
+      <h2>🛠️ The Building Blocks</h2>
+      <p>If you're curious, here are the tools that power your recipe app:</p>
+      <ul style="color: var(--brown-text); line-height: 1.8; margin-left: 20px;">
+        <li><strong>Claude</strong> — The AI that reads handwriting and helped write the code</li>
+        <li><strong>Cursor</strong> — The smart notepad Kyle used to build this</li>
+        <li><strong>Supabase</strong> — Where your recipes are stored (like a digital filing cabinet)</li>
+        <li><strong>GitHub Pages</strong> — What puts it on the internet for you to visit</li>
+      </ul>
+    </div>
+    
+    <!-- Signature -->
+    <div class="signature">
+      <p>Made with <span class="heart">♥</span> by Kyle</p>
+      <p style="font-size: 0.85rem; margin-top: 8px;">December 2025</p>
+    </div>
+    
+    <a href="index.html" class="btn btn--full back-home">← Back to Recipes</a>
+    
+  </div>
+</body>
+</html>
+
