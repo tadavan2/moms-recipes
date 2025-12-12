@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/components.css">
   <style>
     .about-container {
-      max-width: 640px;
+      max-width: 660px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -48,8 +48,8 @@
     
     .story-section p {
       color: var(--brown-text);
-      line-height: 1.7;
-      margin-bottom: 12px;
+      line-height: 1.75;
+      margin-bottom: 14px;
     }
     
     .story-section p:last-child {
@@ -61,13 +61,19 @@
       border-radius: var(--radius-md);
       padding: 20px;
       margin: 16px 0;
-      text-align: center;
+    }
+    
+    .diagram-title {
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 12px;
+      font-size: 0.9rem;
     }
     
     .diagram-flow {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
     }
     
@@ -75,41 +81,73 @@
       background: var(--white);
       border: 2px solid var(--brown-light);
       border-radius: var(--radius-md);
-      padding: 12px 20px;
-      font-size: 0.95rem;
+      padding: 10px 16px;
+      font-size: 0.9rem;
       color: var(--brown);
-      max-width: 280px;
+      max-width: 320px;
       width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .diagram-step .label {
+      font-size: 0.75rem;
+      color: var(--brown-muted);
+      min-width: 70px;
     }
     
     .diagram-arrow {
       color: var(--brown-light);
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
     
-    .highlight-box {
-      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-      border-left: 4px solid var(--green);
+    .analogy-box {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-left: 4px solid #1976d2;
       padding: 16px;
       border-radius: 0 var(--radius-md) var(--radius-md) 0;
       margin: 16px 0;
     }
     
-    .highlight-box p {
+    .analogy-box p {
       margin: 0;
-      color: #2e7d32;
+      color: #0d47a1;
     }
     
-    .fun-fact {
-      background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-      border-radius: var(--radius-md);
+    .analogy-box strong {
+      color: #1565c0;
+    }
+    
+    .tech-term {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 0.95em;
+    }
+    
+    .code-example {
+      background: #2d2d2d;
+      color: #f8f8f2;
       padding: 16px;
+      border-radius: var(--radius-md);
       margin: 16px 0;
-      border-left: 4px solid var(--gold);
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
     }
     
-    .fun-fact strong {
-      color: #f57c00;
+    .code-example .comment {
+      color: #6a9955;
+    }
+    
+    .code-example .kyle {
+      color: #9cdcfe;
+    }
+    
+    .code-example .ai {
+      color: #ce9178;
     }
     
     .signature {
@@ -129,6 +167,17 @@
       text-align: center;
       margin-top: 24px;
     }
+    
+    ul.clean-list {
+      color: var(--brown-text);
+      line-height: 1.8;
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+    
+    ul.clean-list li {
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -138,132 +187,180 @@
     
     <div class="about-header">
       <h1>✨ How This Was Made</h1>
-      <p class="subtitle">A little story about your recipe app</p>
+      <p class="subtitle">The technology behind your recipe app</p>
     </div>
     
-    <!-- Section 1: The Short Version -->
+    <!-- Section 1: The Overview -->
     <div class="story-section">
-      <h2>📖 The Short Version</h2>
+      <h2>📖 The Overview</h2>
       <p>
-        Kyle built this recipe app for you in about <strong>one afternoon</strong> — 
-        not by writing thousands of lines of computer code by hand, but by 
-        <em>having a conversation</em> with an AI assistant named Claude.
+        Kyle built this recipe app in about one afternoon by having a conversation 
+        with an AI assistant called <strong>Claude</strong>. Rather than writing 
+        thousands of lines of code by hand, he described what he wanted in plain 
+        English, and the AI generated the code. He reviewed it, requested changes, 
+        and iterated until it was right.
       </p>
       <p>
-        He described what he wanted ("a recipe app for my mom where she can 
-        upload photos of her handwritten recipe cards"), and Claude helped 
-        write all the code, piece by piece.
-      </p>
-    </div>
-    
-    <!-- Section 2: What is AI? -->
-    <div class="story-section">
-      <h2>🤖 What is This "AI" Thing?</h2>
-      <p>
-        AI stands for "Artificial Intelligence." Think of it like a very 
-        well-read assistant who has studied millions of books, websites, 
-        and computer programs.
-      </p>
-      <p>
-        When you upload a photo of one of your handwritten recipe cards, 
-        the AI <em>looks</em> at the image and reads your cursive handwriting — 
-        something that was nearly impossible for computers just a few years ago!
-      </p>
-      
-      <div class="fun-fact">
-        <strong>Fun fact:</strong> The AI (Claude) was made by a company called 
-        Anthropic. It learned to read by studying billions of pages of text, 
-        including old handwritten documents, letters, and recipe cards just like yours!
-      </div>
-    </div>
-    
-    <!-- Section 3: How It Works -->
-    <div class="story-section">
-      <h2>🔧 How Your Recipe App Works</h2>
-      <p>Here's what happens when you add a new recipe:</p>
-      
-      <div class="diagram">
-        <div class="diagram-flow">
-          <div class="diagram-step">📸 You take a photo of a recipe card</div>
-          <div class="diagram-arrow">↓</div>
-          <div class="diagram-step">🤖 AI reads your handwriting</div>
-          <div class="diagram-arrow">↓</div>
-          <div class="diagram-step">📝 Ingredients & steps are extracted</div>
-          <div class="diagram-arrow">↓</div>
-          <div class="diagram-step">💾 Saved to an online database</div>
-          <div class="diagram-arrow">↓</div>
-          <div class="diagram-step">📱 Appears in your recipe collection!</div>
-        </div>
-      </div>
-      
-      <p>
-        The recipes are stored safely on the internet (in something called 
-        "the cloud"), so you can access them from your phone, tablet, or 
-        any computer — they're always there!
+        This approach — describing what you want and letting AI handle the 
+        implementation details — is sometimes called <strong>"vibe coding."</strong> 
+        It's a significant shift in how software gets built.
       </p>
     </div>
     
-    <!-- Section 4: Vibe Coding -->
+    <!-- Section 2: What is AI, Really? -->
     <div class="story-section">
-      <h2>💬 "Vibe Coding" — A New Way to Build</h2>
+      <h2>🧠 What is AI, Really?</h2>
       <p>
-        Kyle used a tool called <strong>Cursor</strong>, which is like a 
-        smart notepad for programmers. But here's the twist: instead of 
-        typing code himself, he typed messages like:
+        AI, or artificial intelligence, refers to computer systems that can perform 
+        tasks that traditionally required human intelligence — like reading handwriting, 
+        understanding language, or recognizing patterns.
+      </p>
+      <p>
+        The AI used here (Claude, made by a company called Anthropic) is a 
+        <strong>large language model</strong>. It was trained on billions of pages of 
+        text — books, articles, code, documents — and learned to predict patterns in 
+        language. Through this training, it developed the ability to understand context, 
+        follow instructions, and generate coherent responses.
       </p>
       
-      <div class="highlight-box">
+      <div class="analogy-box">
         <p>
-          "Make the colors warm and cozy, like a grandma's kitchen. 
-          Add a PIN so only family can see the recipes."
+          <strong>A chemistry analogy:</strong> Training an AI model is somewhat like 
+          optimizing a reaction. You have inputs (training data), conditions (the model 
+          architecture), and you iteratively adjust parameters to minimize error — similar 
+          to how you'd tune temperature, pressure, or catalysts to maximize yield. The 
+          "trained model" is the stable, optimized result.
         </p>
       </div>
       
       <p>
-        The AI understood these instructions and wrote the actual computer 
-        code. Kyle would check the result, suggest changes ("make the text 
-        bigger for easier reading"), and the AI would update it.
-      </p>
-      <p>
-        This back-and-forth conversation is sometimes called <strong>"vibe coding"</strong> — 
-        you describe the <em>vibe</em> you want, and the AI figures out the details!
+        What's remarkable is that these models can now <em>see</em> images. When you 
+        upload a photo of your handwritten recipe card, the AI analyzes the pixels, 
+        recognizes the letter forms, and extracts the text — including your cursive! 
+        This capability barely existed three years ago.
       </p>
     </div>
     
-    <!-- Section 5: What Makes This Special -->
+    <!-- Section 3: The Architecture -->
     <div class="story-section">
-      <h2>💝 What Makes This Special</h2>
+      <h2>🏗️ How the System Works</h2>
       <p>
-        A few years ago, building something like this would have taken 
-        a professional programmer <strong>weeks or months</strong>. The hardest 
-        part — reading handwritten cursive — might not have worked at all!
+        Your recipe app has four main components:
+      </p>
+      
+      <ul class="clean-list">
+        <li><strong>The Frontend</strong> — What you see and interact with. It's a website 
+        (HTML, CSS, JavaScript) hosted for free on GitHub Pages.</li>
+        <li><strong>The Database</strong> — Where your recipes are stored. Think of it as a 
+        structured spreadsheet in the cloud, with columns for recipe name, ingredients, 
+        directions, etc.</li>
+        <li><strong>The Storage Bucket</strong> — Where the original photos of your recipe 
+        cards are kept. Like a folder on the internet.</li>
+        <li><strong>The API Layer</strong> — The middleman that connects everything. When 
+        you upload a photo, the API receives it, sends it to Claude for reading, gets back 
+        the extracted text, and saves it to the database.</li>
+      </ul>
+      
+      <div class="diagram">
+        <div class="diagram-title">What happens when you upload a recipe:</div>
+        <div class="diagram-flow">
+          <div class="diagram-step"><span class="label">Your phone</span> Takes photo, sends to server</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step"><span class="label">Storage</span> Photo saved to cloud bucket</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step"><span class="label">API</span> Sends image to Claude AI</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step"><span class="label">Claude</span> Reads handwriting, returns structured data</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step"><span class="label">Database</span> Recipe saved with all fields</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-step"><span class="label">Your phone</span> Shows the new recipe!</div>
+        </div>
+      </div>
+      
+      <p>
+        An <span class="tech-term">API</span> (Application Programming Interface) is simply 
+        a defined way for different software systems to communicate. When the website needs 
+        to save a recipe, it sends a structured request to the API; the API processes it 
+        and sends back a response. It's like a standardized form that both parties agree to use.
+      </p>
+      
+      <p>
+        A <span class="tech-term">database</span> is structured data storage. Unlike a Word 
+        document or a pile of index cards, a database organizes information into tables with 
+        defined columns. This makes it fast to search ("show me all cookie recipes") and 
+        reliable (data doesn't get corrupted or lost).
+      </p>
+    </div>
+    
+    <!-- Section 4: The Conversation -->
+    <div class="story-section">
+      <h2>💬 How Kyle Built This</h2>
+      <p>
+        Kyle used a tool called <strong>Cursor</strong>, which is a code editor with AI 
+        built in. Instead of typing code directly, he typed requests like this:
+      </p>
+      
+      <div class="code-example">
+        <span class="comment">// Kyle's request:</span><br>
+        <span class="kyle">"Add a PIN screen so only family can access the recipes. 
+        Store the PIN securely so it can't be seen in the code."</span><br><br>
+        <span class="comment">// AI's response:</span><br>
+        <span class="ai">[Generates the PIN screen code, creates a secure 
+        server function to verify it, updates the database schema]</span><br><br>
+        <span class="comment">// Kyle reviews, then:</span><br>
+        <span class="kyle">"Make the PIN input larger and add a 'shake' animation 
+        if the wrong code is entered."</span><br><br>
+        <span class="ai">[Updates the code accordingly]</span>
+      </div>
+      
+      <p>
+        This back-and-forth continued for a few hours. Kyle didn't need to know the 
+        syntax of every programming language involved — he just needed to know what 
+        he wanted and how to evaluate whether the result was correct.
       </p>
       <p>
-        Today, with AI assistance, Kyle was able to build this in a single 
-        afternoon, complete with:
+        This is why it's called "vibe coding" — you describe the vibe, the feel, 
+        the behavior you want, and the AI handles the technical implementation.
       </p>
-      <ul style="color: var(--brown-text); line-height: 1.8; margin-left: 20px;">
-        <li>A beautiful, easy-to-read design</li>
-        <li>The ability to read your handwritten cards</li>
-        <li>A shopping list that combines ingredients</li>
-        <li>Categories to organize everything</li>
-        <li>A secret PIN so it's just for family</li>
+    </div>
+    
+    <!-- Section 5: Why This Matters -->
+    <div class="story-section">
+      <h2>⚡ Why This is Significant</h2>
+      <p>
+        Three years ago, building an app like this would have required:
+      </p>
+      <ul class="clean-list">
+        <li>A professional developer (or team) working for weeks</li>
+        <li>Setting up and maintaining servers</li>
+        <li>Licensing or training an OCR (optical character recognition) system — which still probably wouldn't handle cursive well</li>
+        <li>Significant cost — easily thousands of dollars</li>
       </ul>
       <p>
-        All because he wanted you to have your treasured recipes in one 
-        easy place, accessible from your phone anytime. 💛
+        Today, with AI-assisted development and modern cloud services, Kyle built this 
+        in an afternoon at minimal cost. The monthly expense to run this app is about 
+        $25 — less than a dinner out.
+      </p>
+      <p>
+        More importantly, the cursive handwriting recognition <em>actually works</em>. 
+        That's the part that was nearly impossible until very recently. The same AI 
+        that can read your handwritten recipe cards can also write code, answer questions, 
+        and analyze images — capabilities that are genuinely new in the world.
       </p>
     </div>
     
-    <!-- Section 6: The Tools -->
+    <!-- Section 6: The Stack -->
     <div class="story-section">
-      <h2>🛠️ The Building Blocks</h2>
-      <p>If you're curious, here are the tools that power your recipe app:</p>
-      <ul style="color: var(--brown-text); line-height: 1.8; margin-left: 20px;">
-        <li><strong>Claude</strong> — The AI that reads handwriting and helped write the code</li>
-        <li><strong>Cursor</strong> — The smart notepad Kyle used to build this</li>
-        <li><strong>Supabase</strong> — Where your recipes are stored (like a digital filing cabinet)</li>
-        <li><strong>GitHub Pages</strong> — What puts it on the internet for you to visit</li>
+      <h2>🛠️ The Technical Stack</h2>
+      <p>For the curious, here's exactly what powers your recipe app:</p>
+      <ul class="clean-list">
+        <li><strong>Claude (Anthropic)</strong> — The AI that reads handwriting and helped write the code</li>
+        <li><strong>Cursor</strong> — The AI-enabled code editor Kyle used</li>
+        <li><strong>Supabase</strong> — Provides the database, file storage, and API layer (a "backend-as-a-service")</li>
+        <li><strong>GitHub Pages</strong> — Free website hosting for the frontend</li>
+        <li><strong>PostgreSQL</strong> — The database engine (runs inside Supabase)</li>
+        <li><strong>JavaScript, HTML, CSS</strong> — The languages the website is written in</li>
       </ul>
     </div>
     
@@ -278,4 +375,3 @@
   </div>
 </body>
 </html>
-
