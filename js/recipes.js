@@ -20,6 +20,7 @@ async function loadRecipes() {
       id: r.id,
       name: r.name,
       from: r.source,
+      category: r.category || 'Other',
       preview: r.preview,
       ingredients: r.ingredients || [],
       directions: r.directions || [],
@@ -41,25 +42,26 @@ async function loadRecipes() {
   }
 }
 
-// Populate filter buttons based on sources
+// Populate filter buttons based on categories
 function populateFilters() {
-  const sources = new Set();
+  const categories = new Set();
   recipes.forEach(r => {
-    if (r.from) sources.add(r.from);
+    if (r.category) categories.add(r.category);
   });
   
   const container = document.getElementById('filtersContainer');
   if (!container) return;
   
-  // Keep "All" button, add source filters
+  // Keep "All" button, add category filters
   let html = '<button class="filter-btn active" data-filter="all">All</button>';
   
-  // Sort sources alphabetically
-  const sortedSources = Array.from(sources).sort();
-  sortedSources.forEach(source => {
-    // Shorten long names for the button
-    const shortName = source.split(' ')[0]; // Just first name
-    html += `<button class="filter-btn" data-filter="${escapeAttr(source)}">${escapeHtml(shortName)}</button>`;
+  // Define category order for consistent display
+  const categoryOrder = ['Cookies', 'Candy', 'Cakes', 'Breads', 'Main Dishes', 'Sides', 'Appetizers', 'Drinks', 'Other'];
+  
+  categoryOrder.forEach(cat => {
+    if (categories.has(cat)) {
+      html += `<button class="filter-btn" data-filter="${escapeAttr(cat)}">${escapeHtml(cat)}</button>`;
+    }
   });
   
   container.innerHTML = html;
@@ -83,7 +85,7 @@ function applyFilter() {
   if (currentFilter === 'all') {
     filteredRecipes = [...recipes];
   } else {
-    filteredRecipes = recipes.filter(r => r.from === currentFilter);
+    filteredRecipes = recipes.filter(r => r.category === currentFilter);
   }
   renderRecipes();
 }
@@ -101,10 +103,7 @@ function renderRecipes() {
     <div class="recipe-card ${selectedRecipes.has(recipe.id) ? 'selected' : ''}" 
          data-id="${recipe.id}">
       <div class="card-header">
-        <div>
-          <h2>${escapeHtml(recipe.name)}</h2>
-          ${recipe.from ? `<div class="from">From ${escapeHtml(recipe.from)}</div>` : ''}
-        </div>
+        <h2>${escapeHtml(recipe.name)}</h2>
         <div class="checkbox"></div>
       </div>
       <div class="card-preview">

@@ -81,6 +81,7 @@ Return ONLY valid JSON in this exact format (no markdown, no explanation, no ext
 {
   "name": "Recipe Name",
   "source": "Person's Name or null if not specified",
+  "category": "One of: Cookies, Candy, Cakes, Breads, Main Dishes, Sides, Appetizers, Drinks, Other",
   "preview": "One sentence describing what this recipe makes",
   "ingredients": [
     {"item": "flour", "amount": "2 cups", "category": "Baking"},
@@ -93,7 +94,18 @@ Return ONLY valid JSON in this exact format (no markdown, no explanation, no ext
   "tip": "Any tips, notes, or special instructions, or null if none"
 }
 
-Categories for ingredients (pick the best match):
+RECIPE CATEGORIES (pick the best match for the overall recipe):
+- Cookies (cookies, bars, biscotti)
+- Candy (fudge, truffles, caramels, chocolate treats)
+- Cakes (cakes, pies, tarts, cheesecake)
+- Breads (breads, muffins, rolls, scones)
+- Main Dishes (entrees, casseroles, soups, meats)
+- Sides (vegetables, salads, side dishes)
+- Appetizers (dips, finger foods, snacks)
+- Drinks (beverages, punch, cocktails)
+- Other (anything that doesn't fit above)
+
+INGREDIENT CATEGORIES (for shopping list):
 Dairy, Baking, Nuts, Snacks, Produce, Meat, Spices, Other
 
 If you cannot read something clearly, make your best guess and add [?] after it.

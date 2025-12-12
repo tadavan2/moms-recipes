@@ -217,6 +217,7 @@ async function processWithClaude() {
 function populateForm(recipe) {
   document.getElementById('recipeName').value = recipe.name || '';
   document.getElementById('recipeSource').value = recipe.source || '';
+  document.getElementById('recipeCategory').value = recipe.category || 'Other';
   document.getElementById('recipePreview').value = recipe.preview || '';
   document.getElementById('recipeTip').value = recipe.tip || '';
   
@@ -303,6 +304,7 @@ async function saveRecipe(e) {
   const recipe = {
     name: document.getElementById('recipeName').value.trim(),
     source: document.getElementById('recipeSource').value.trim() || null,
+    category: document.getElementById('recipeCategory').value || 'Other',
     preview: document.getElementById('recipePreview').value.trim() || null,
     ingredients: ingredients,
     directions: directions,
