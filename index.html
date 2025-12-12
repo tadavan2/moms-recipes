@@ -9,9 +9,12 @@
     
     body {
       font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #fef9f3 0%, #f5ebe0 100%);
+      background: linear-gradient(180deg, #fef9f3 0%, #f5ebe0 50%, #efe4d4 100%);
       min-height: 100vh;
       padding: 20px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #4a3728;
     }
     
     .container {
@@ -22,20 +25,23 @@
     header {
       text-align: center;
       margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, #8b4513 0%, #5c4033 100%);
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(92, 64, 51, 0.3);
     }
     
     h1 {
-      font-size: 2.5rem;
-      color: #5c4033;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      font-size: 2.2rem;
+      color: #fff8f0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      margin-bottom: 8px;
     }
     
-    h1 span { font-size: 1.5rem; }
-    
     .subtitle {
-      color: #8b7355;
+      color: #f5ebe0;
       font-style: italic;
-      margin-top: 5px;
+      font-size: 1.1rem;
     }
     
     .actions {
@@ -50,13 +56,14 @@
       background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
       color: white;
       border: none;
-      padding: 12px 24px;
-      border-radius: 25px;
+      padding: 16px 28px;
+      border-radius: 30px;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+      min-height: 54px;
     }
     
     .btn:hover {
@@ -65,7 +72,7 @@
     }
     
     .btn:disabled {
-      background: #ccc;
+      background: #bbb;
       box-shadow: none;
       cursor: not-allowed;
       transform: none;
@@ -82,38 +89,36 @@
     
     .recipe-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
       margin-bottom: 30px;
     }
     
     .recipe-card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      background: #fffcf7;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(92, 64, 51, 0.15);
       overflow: hidden;
       transition: all 0.3s;
       cursor: pointer;
       position: relative;
+      border: 2px solid transparent;
     }
     
     .recipe-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(92, 64, 51, 0.2);
     }
     
     .recipe-card.selected {
-      outline: 4px solid #c41e3a;
-    }
-    
-    .recipe-card.expanded {
-      /* removed - no longer expanding */
+      border-color: #c41e3a;
+      box-shadow: 0 8px 30px rgba(196, 30, 58, 0.25);
     }
     
     .card-header {
-      background: linear-gradient(135deg, #8b4513 0%, #5c4033 100%);
+      background: linear-gradient(135deg, #8b4513 0%, #6b3410 100%);
       color: white;
-      padding: 20px;
+      padding: 20px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -121,17 +126,19 @@
     
     .card-header h2 {
       font-size: 1.4rem;
+      line-height: 1.3;
     }
     
     .card-header .from {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       opacity: 0.9;
       font-style: italic;
+      margin-top: 4px;
     }
     
     .checkbox {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border: 3px solid white;
       border-radius: 50%;
       display: flex;
@@ -149,6 +156,7 @@
       content: '✓';
       color: #5c4033;
       font-weight: bold;
+      font-size: 1.2rem;
       opacity: 0;
       transition: opacity 0.2s;
     }
@@ -158,28 +166,108 @@
     }
     
     .card-preview {
-      padding: 20px;
+      padding: 24px;
       color: #5c4033;
     }
     
     .card-preview p {
-      margin-bottom: 10px;
-      line-height: 1.5;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
     }
     
     .expand-hint {
-      color: #c41e3a;
-      font-size: 0.9rem;
+      color: #b8860b;
+      font-size: 1rem;
       font-style: italic;
     }
     
-    .card-details {
+    /* PIN Entry Modal */
+    .pin-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #5c4033 0%, #3d2a1f 100%);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .pin-overlay.hidden {
       display: none;
     }
     
+    .pin-box {
+      background: #fffcf7;
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    
+    .pin-box h2 {
+      color: #5c4033;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    
+    .pin-box p {
+      color: #8b7355;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+    
+    .pin-input {
+      width: 100%;
+      padding: 18px;
+      font-size: 2rem;
+      text-align: center;
+      border: 3px solid #d4c4b0;
+      border-radius: 12px;
+      font-family: inherit;
+      letter-spacing: 0.5em;
+      margin-bottom: 20px;
+      background: #fff;
+    }
+    
+    .pin-input:focus {
+      outline: none;
+      border-color: #8b4513;
+    }
+    
+    .pin-error {
+      color: #c41e3a;
+      margin-bottom: 20px;
+      font-weight: bold;
+      min-height: 1.5em;
+    }
+    
     /* Recipe Detail Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(61, 42, 31, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
     .recipe-modal {
-      background: white;
+      background: #fffcf7;
       border-radius: 20px;
       max-width: 550px;
       width: 100%;
@@ -193,65 +281,48 @@
     }
     
     .recipe-modal .modal-body {
-      padding: 25px;
+      padding: 28px;
     }
     
     .recipe-modal .from-line {
       font-style: italic;
       color: #8b7355;
-      margin-bottom: 20px;
-      font-size: 1rem;
+      margin-bottom: 24px;
+      font-size: 1.1rem;
     }
     
     .recipe-modal h3 {
       color: #5c4033;
-      margin: 20px 0 12px;
-      font-size: 1.2rem;
-      border-bottom: 2px solid #f5ebe0;
-      padding-bottom: 5px;
+      margin: 24px 0 14px;
+      font-size: 1.3rem;
+      border-bottom: 2px solid #e8ddd0;
+      padding-bottom: 8px;
     }
     
     .recipe-modal ul, .recipe-modal ol {
-      margin-left: 25px;
-      color: #444;
+      margin-left: 28px;
+      color: #4a3728;
       line-height: 2;
     }
     
     .recipe-modal li {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
     }
     
     .recipe-tip {
       background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
-      border-left: 4px solid #ffc107;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 24px;
+      border-left: 5px solid #daa520;
     }
     
-    .recipe-tip strong { color: #856404; }
+    .recipe-tip strong { color: #8b6914; }
     
     /* Shopping List Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    
-    .modal-overlay.active {
-      display: flex;
-    }
-    
     .modal {
-      background: white;
+      background: #fffcf7;
       border-radius: 20px;
       max-width: 500px;
       width: 100%;
@@ -263,7 +334,7 @@
     .modal-header {
       background: linear-gradient(135deg, #2e8b57 0%, #1a5235 100%);
       color: white;
-      padding: 20px;
+      padding: 22px 24px;
       border-radius: 20px 20px 0 0;
       display: flex;
       justify-content: space-between;
@@ -272,54 +343,62 @@
       top: 0;
     }
     
-    .modal-header h2 { font-size: 1.5rem; }
+    .modal-header h2 { 
+      font-size: 1.5rem; 
+    }
     
     .close-btn {
       background: none;
       border: none;
       color: white;
-      font-size: 2rem;
+      font-size: 2.2rem;
       cursor: pointer;
       line-height: 1;
+      padding: 0 8px;
+      min-width: 44px;
+      min-height: 44px;
     }
     
     .modal-body {
-      padding: 20px;
+      padding: 24px;
     }
     
     .shopping-category {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
     
     .shopping-category h3 {
       color: #2e8b57;
       border-bottom: 2px solid #2e8b57;
-      padding-bottom: 5px;
-      margin-bottom: 10px;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
     }
     
     .shopping-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px dotted #eee;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px dotted #d4c4b0;
     }
     
     .shopping-item input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       accent-color: #2e8b57;
+      flex-shrink: 0;
     }
     
     .shopping-item label {
       flex: 1;
-      color: #333;
+      color: #4a3728;
+      font-size: 1.05rem;
     }
     
     .shopping-item .recipe-tags {
-      font-size: 0.75rem;
-      color: #888;
+      font-size: 0.85rem;
+      color: #8b7355;
     }
     
     .shopping-item.checked label {
@@ -329,19 +408,48 @@
     
     .print-btn {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 24px;
     }
     
     .recipes-included {
-      background: #f5f5f5;
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 0.9rem;
-      color: #666;
+      background: #f5ebe0;
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-size: 1rem;
+      color: #6b5344;
     }
     
     .recipes-included strong { color: #5c4033; }
+    
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 60px;
+      color: #8b7355;
+      font-size: 1.2rem;
+    }
+    
+    .loading::after {
+      content: '...';
+      animation: dots 1.5s infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+    
+    /* Error state */
+    .error-message {
+      text-align: center;
+      padding: 40px;
+      color: #c41e3a;
+      background: #fff0f0;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
     
     @media print {
       body { background: white; }
@@ -352,29 +460,54 @@
     }
     
     @media (max-width: 600px) {
-      h1 { font-size: 1.8rem; }
-      h1 span { font-size: 1.2rem; }
-      .card-header h2 { font-size: 1.2rem; }
+      body { padding: 12px; font-size: 17px; }
+      h1 { font-size: 1.7rem; }
+      header { padding: 16px; }
+      .card-header h2 { font-size: 1.25rem; }
+      .card-preview { padding: 20px; }
+      .btn { padding: 14px 22px; font-size: 1rem; }
+      .recipe-grid { gap: 16px; }
     }
   </style>
 </head>
 <body>
+  <!-- PIN Entry Screen -->
+  <div class="pin-overlay" id="pinOverlay">
+    <div class="pin-box">
+      <h2>🍪 Mom's Recipe Box</h2>
+      <p>Enter the family PIN to view recipes</p>
+      <input type="password" 
+             class="pin-input" 
+             id="pinInput" 
+             maxlength="4" 
+             inputmode="numeric" 
+             pattern="[0-9]*"
+             autocomplete="off"
+             placeholder="••••">
+      <div class="pin-error" id="pinError"></div>
+      <button class="btn" id="pinSubmit">Open Recipe Box</button>
+    </div>
+  </div>
+
   <div class="container">
     <header>
-      <h1>🍪 Mom's Recipe Box <span>✨</span></h1>
+      <h1>🍪 Mom's Recipe Box</h1>
       <p class="subtitle">Christmas Favorites from Barb Creamer's Kitchen</p>
     </header>
     
     <div class="actions">
       <button class="btn btn-secondary" id="shoppingBtn" disabled>
-        🛒 Make Shopping List (<span id="selectedCount">0</span> selected)
+        🛒 Shopping List (<span id="selectedCount">0</span>)
       </button>
       <button class="btn" id="selectAllBtn">Select All</button>
     </div>
     
-    <div class="recipe-grid" id="recipeGrid"></div>
+    <div class="recipe-grid" id="recipeGrid">
+      <div class="loading">Loading recipes</div>
+    </div>
   </div>
   
+  <!-- Shopping List Modal -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <div class="modal-header">
@@ -385,6 +518,7 @@
     </div>
   </div>
   
+  <!-- Recipe Detail Modal -->
   <div class="modal-overlay" id="recipeModalOverlay">
     <div class="recipe-modal">
       <div class="modal-header">
@@ -395,126 +529,99 @@
     </div>
   </div>
 
+  <!-- Supabase Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
   <script>
-    const recipes = [
-      {
-        id: 'oreo-truffle',
-        name: 'Oreo Truffle',
-        from: 'Barb Everard',
-        preview: 'Crushed Oreos mixed with cream cheese, dipped in chocolate. Dangerously addictive!',
-        ingredients: [
-          { item: 'Oreo cookies', amount: '1 package', category: 'Snacks' },
-          { item: 'Cream cheese', amount: '8 oz, softened', category: 'Dairy' },
-          { item: 'Semi-sweet baking chocolate', amount: '2 (8 oz) bars', category: 'Baking' },
-          { item: 'Dipping chocolate', amount: '1 package', category: 'Baking' }
-        ],
-        directions: [
-          'Keep 5 cookies to crush for topping',
-          'Crush remaining cookies in food processor',
-          'Add softened cream cheese and mix well',
-          'Roll into 1" balls',
-          'Dip in melted chocolate',
-          'Sprinkle with topping',
-          'Set up in freezer',
-          'Use cookie sheet & parchment paper'
-        ],
-        tip: 'Topping ideas: Crushed candy canes, toffee bits, Andes mints, toasted almonds, crushed Oreos, or flaked coconut!'
-      },
-      {
-        id: 'pecan',
-        name: 'Pecan Balls',
-        from: 'Barb Everard',
-        preview: 'Buttery melt-in-your-mouth cookies rolled in powdered sugar. A holiday classic!',
-        ingredients: [
-          { item: 'Flour', amount: '1 cup', category: 'Baking' },
-          { item: 'Butter', amount: '½ cup, softened', category: 'Dairy' },
-          { item: 'Pecans', amount: '1 cup, chopped', category: 'Nuts' },
-          { item: 'Sugar', amount: '2 T', category: 'Baking' },
-          { item: 'Salt', amount: '⅛ tsp', category: 'Baking' },
-          { item: 'Vanilla extract', amount: '1 tsp', category: 'Baking' },
-          { item: 'Powdered sugar', amount: 'for rolling', category: 'Baking' }
-        ],
-        directions: [
-          'Combine all ingredients except powdered sugar',
-          'Refrigerate 30 minutes',
-          'Preheat oven to 350°',
-          'Roll into balls',
-          'Place 1 inch apart on ungreased cookie sheet',
-          'Bake 15-20 min (do not brown!)',
-          'Let stand 1 min, cool slightly',
-          'Roll in powdered sugar while warm',
-          'Cool completely'
-        ],
-        tip: 'Spray Pam on sheet lightly to help with cleanup!'
-      },
-      {
-        id: 'pretzels',
-        name: 'Double Dipped Pretzels',
-        from: 'Barb Everard',
-        preview: 'Long pretzels wrapped in caramel, dipped in chocolate, decorated with toppings. Double boiler needed!',
-        ingredients: [
-          { item: 'Long pretzels', amount: '3 bags', category: 'Snacks' },
-          { item: 'Caramel (Werther\'s chunks)', amount: '2 bags', category: 'Baking' },
-          { item: 'Milk chocolate chips', amount: '1 bag', category: 'Baking' },
-          { item: 'Toasted almonds', amount: 'for topping', category: 'Nuts' },
-          { item: 'Toasted coconut', amount: 'for topping', category: 'Baking' },
-          { item: 'Red/white/green sprinkles', amount: 'for topping', category: 'Baking' },
-          { item: 'Mixed nuts', amount: 'any type, for topping', category: 'Nuts' }
-        ],
-        directions: [
-          'Cut caramel into tiny slabs',
-          'Roll caramel into long length',
-          'Wrap caramel around pretzel',
-          'Dip in melted chocolate',
-          'Decorate with sprinkles, toasted almonds, or nuts',
-          'Freeze to set up',
-          'Use ribbon at bottom to tie off package'
-        ],
-        tip: 'Need large bags to package as gifts! Use a double boiler for melting.'
-      },
-      {
-        id: 'oreo-cookies',
-        name: 'Homemade Oreo Cookies',
-        from: 'Jen Rosen',
-        preview: 'Soft devil\'s food cookies with cream cheese filling. Makes 50 cookies! Can sub dark chocolate cake mix.',
-        ingredients: [
-          { item: "Devil's food cake mix", amount: '2 boxes (can sub dark chocolate)', category: 'Baking' },
-          { item: 'Eggs', amount: '4', category: 'Dairy' },
-          { item: 'Vegetable oil', amount: '⅔ cup', category: 'Baking' },
-          { item: 'Cream cheese', amount: '4 oz', category: 'Dairy' },
-          { item: 'Margarine', amount: '½ cup', category: 'Dairy' },
-          { item: 'Powdered sugar', amount: '1¾ cup', category: 'Baking' },
-          { item: 'Vanilla extract', amount: '1 tsp', category: 'Baking' }
-        ],
-        directions: [
-          'Mix first 3 ingredients (cake mix, eggs, oil)',
-          'Form into 1 inch balls',
-          'Bake at 350° for 9 minutes',
-          'Remove from oven even if they don\'t look done',
-          'Mix filling: cream cheese, margarine, powdered sugar, vanilla',
-          'Spread on bottom of one cookie, top with another to form sandwich',
-          'May use food coloring for holiday colors'
-        ],
-        tip: 'Use water on hands to roll sticky dough. Use paddle attachment on mixer, NOT dough hook! Cook 8 min for softer cookies.'
-      }
-    ];
-
+    // Supabase configuration
+    const SUPABASE_URL = 'https://pieukthfqinsiygjvwnz.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZXVrdGhmcWluc2l5Z2p2d256Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0OTYyNTIsImV4cCI6MjA4MTA3MjI1Mn0.3RxUTgmpD-yn3N7g8HaJLD9LvKUUQEHZ8XA38XucfjM';
+    
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    let recipes = [];
     let selectedRecipes = new Set();
+    
+    // Check if already authenticated
+    function isAuthenticated() {
+      return localStorage.getItem('recipes_pin_verified') === 'true';
+    }
+    
+    // Show/hide PIN overlay
+    function showPinOverlay(show) {
+      document.getElementById('pinOverlay').classList.toggle('hidden', !show);
+    }
+    
+    // Verify PIN against database
+    async function verifyPin(pin) {
+      try {
+        const { data, error } = await supabase
+          .from('app_config')
+          .select('value')
+          .eq('key', 'pin')
+          .single();
+        
+        if (error) throw error;
+        return data.value === pin;
+      } catch (err) {
+        console.error('PIN check error:', err);
+        return false;
+      }
+    }
+    
+    // Load recipes from database
+    async function loadRecipes() {
+      try {
+        const { data, error } = await supabase
+          .from('recipes')
+          .select('*')
+          .order('name');
+        
+        if (error) throw error;
+        
+        recipes = data.map(r => ({
+          id: r.id,
+          name: r.name,
+          from: r.source,
+          preview: r.preview,
+          ingredients: r.ingredients || [],
+          directions: r.directions || [],
+          tip: r.tip,
+          imageUrl: r.original_image_url
+        }));
+        
+        renderRecipes();
+      } catch (err) {
+        console.error('Error loading recipes:', err);
+        document.getElementById('recipeGrid').innerHTML = `
+          <div class="error-message">
+            <p>Could not load recipes.</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Please check your connection and try again.</p>
+          </div>
+        `;
+      }
+    }
 
     function renderRecipes() {
       const grid = document.getElementById('recipeGrid');
+      
+      if (recipes.length === 0) {
+        grid.innerHTML = '<div class="loading">No recipes yet!</div>';
+        return;
+      }
+      
       grid.innerHTML = recipes.map(recipe => `
         <div class="recipe-card ${selectedRecipes.has(recipe.id) ? 'selected' : ''}" 
              data-id="${recipe.id}">
           <div class="card-header">
             <div>
               <h2>${recipe.name}</h2>
-              <div class="from">From ${recipe.from}</div>
+              <div class="from">From ${recipe.from || 'the family'}</div>
             </div>
             <div class="checkbox"></div>
           </div>
           <div class="card-preview">
-            <p>${recipe.preview}</p>
+            <p>${recipe.preview || ''}</p>
             <p class="expand-hint">👆 Tap to view full recipe</p>
           </div>
         </div>
@@ -538,18 +645,21 @@
       const recipe = recipes.find(r => r.id === id);
       if (!recipe) return;
       
+      const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
+      const directions = Array.isArray(recipe.directions) ? recipe.directions : [];
+      
       document.getElementById('recipeModalTitle').textContent = recipe.name;
       document.getElementById('recipeModalBody').innerHTML = `
-        <p class="from-line">From the kitchen of ${recipe.from}</p>
+        <p class="from-line">From the kitchen of ${recipe.from || 'the family'}</p>
         
         <h3>📝 Ingredients</h3>
         <ul>
-          ${recipe.ingredients.map(i => `<li><strong>${i.amount}</strong> ${i.item}</li>`).join('')}
+          ${ingredients.map(i => `<li><strong>${i.amount}</strong> ${i.item}</li>`).join('')}
         </ul>
         
         <h3>👩‍🍳 Directions</h3>
         <ol>
-          ${recipe.directions.map(d => `<li>${d}</li>`).join('')}
+          ${directions.map(d => `<li>${d}</li>`).join('')}
         </ol>
         
         ${recipe.tip ? `<div class="recipe-tip"><strong>💡 Mom's Tip:</strong> ${recipe.tip}</div>` : ''}
@@ -580,13 +690,14 @@
       const combined = {};
 
       selected.forEach(recipe => {
-        recipe.ingredients.forEach(ing => {
+        const ingredients = Array.isArray(recipe.ingredients) ? recipe.ingredients : [];
+        ingredients.forEach(ing => {
           const key = ing.item.toLowerCase();
           if (!combined[key]) {
             combined[key] = {
               item: ing.item,
               amounts: [],
-              category: ing.category,
+              category: ing.category || 'Other',
               recipes: []
             };
           }
@@ -617,7 +728,7 @@
                 <input type="checkbox" id="item-${cat}-${i}">
                 <label for="item-${cat}-${i}">
                   <strong>${item.item}</strong><br>
-                  <span style="color: #666; font-size: 0.9rem;">${smartCombineAmounts(item.amounts)}</span>
+                  <span style="color: #8b7355; font-size: 0.95rem;">${smartCombineAmounts(item.amounts)}</span>
                 </label>
                 <span class="recipe-tags">${item.recipes.length > 1 ? '(' + item.recipes.join(' + ') + ')' : ''}</span>
               </div>
@@ -637,16 +748,25 @@
     }
 
     function getCategoryEmoji(cat) {
-      const emojis = { 'Dairy': '🧈', 'Baking': '🥣', 'Nuts': '🥜', 'Toppings': '🍬' };
+      const emojis = { 
+        'Dairy': '🧈', 
+        'Baking': '🥣', 
+        'Nuts': '🥜', 
+        'Snacks': '🥨',
+        'Produce': '🥕',
+        'Meat': '🥩',
+        'Spices': '🌿',
+        'Other': '📦'
+      };
       return emojis[cat] || '📦';
     }
 
     function smartCombineAmounts(amounts) {
       if (amounts.length === 1) return amounts[0];
-      // Try to be smart about combining
       return amounts.join(' + ');
     }
 
+    // Event Listeners
     document.getElementById('shoppingBtn').addEventListener('click', generateShoppingList);
     
     document.getElementById('selectAllBtn').addEventListener('click', () => {
@@ -677,8 +797,44 @@
         document.getElementById('recipeModalOverlay').classList.remove('active');
       }
     });
+    
+    // PIN form handlers
+    document.getElementById('pinSubmit').addEventListener('click', async () => {
+      const pin = document.getElementById('pinInput').value;
+      const errorEl = document.getElementById('pinError');
+      
+      if (!pin) {
+        errorEl.textContent = 'Please enter the PIN';
+        return;
+      }
+      
+      const valid = await verifyPin(pin);
+      
+      if (valid) {
+        localStorage.setItem('recipes_pin_verified', 'true');
+        showPinOverlay(false);
+        loadRecipes();
+      } else {
+        errorEl.textContent = 'Incorrect PIN. Try again!';
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+      }
+    });
+    
+    document.getElementById('pinInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('pinSubmit').click();
+      }
+    });
 
-    renderRecipes();
+    // Initialize
+    if (isAuthenticated()) {
+      showPinOverlay(false);
+      loadRecipes();
+    } else {
+      showPinOverlay(true);
+      document.getElementById('pinInput').focus();
+    }
   </script>
 </body>
 </html>
