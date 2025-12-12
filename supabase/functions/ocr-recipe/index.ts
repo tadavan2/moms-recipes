@@ -1,8 +1,6 @@
 // OCR Recipe Edge Function
 // Receives an image and uses Claude to extract recipe data
 
-import "jsr:@anthropic-ai/sdk"
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
