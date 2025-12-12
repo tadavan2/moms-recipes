@@ -14,17 +14,24 @@ function showPinOverlay(show) {
   }
 }
 
-// Verify PIN against database
+// Verify PIN via secure edge function (PIN stored as secret, not in database)
 async function verifyPin(pin) {
   try {
-    const { data, error } = await supabase
-      .from('app_config')
-      .select('value')
-      .eq('key', 'pin')
-      .single();
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-pin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ pin })
+    });
     
-    if (error) throw error;
-    return data.value === pin;
+    if (!response.ok) {
+      throw new Error('PIN verification failed');
+    }
+    
+    const data = await response.json();
+    return data.valid === true;
   } catch (err) {
     console.error('PIN check error:', err);
     return false;
