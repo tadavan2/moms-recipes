@@ -28,11 +28,28 @@
     
     <!-- Step 1: Upload -->
     <div class="card" id="step1">
-      <h2><span class="step-number">1</span> Upload Photo</h2>
+      <h2><span class="step-number">1</span> Upload Photo(s)</h2>
+      <p style="margin-bottom: 16px; color: #8b7355; font-size: 0.95rem;">
+        Works with handwritten cards, printed recipes, or emails with notes!
+      </p>
+      
+      <!-- Front side -->
       <div class="upload-area" id="uploadArea">
         <input type="file" id="imageInput" accept="image/*" capture="environment">
         <div class="upload-icon">📷</div>
         <p class="upload-text">Tap to take photo or choose file</p>
+      </div>
+      
+      <!-- Back side (optional) -->
+      <div id="backSideSection" class="hidden" style="margin-top: 16px;">
+        <p style="margin-bottom: 8px; color: #5c4033; font-weight: bold; font-size: 0.95rem;">
+          📄 Two-sided card? Add the back:
+        </p>
+        <div class="upload-area" id="uploadAreaBack" style="padding: 24px 16px;">
+          <input type="file" id="imageInputBack" accept="image/*" capture="environment">
+          <div class="upload-icon" style="font-size: 2rem;">🔄</div>
+          <p class="upload-text" style="font-size: 0.95rem;">Tap to add back side (optional)</p>
+        </div>
       </div>
     </div>
     
