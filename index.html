@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mom's Recipe Box</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Mom's Recipes</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
   <!-- PIN Entry Screen -->
   <div class="pin-overlay" id="pinOverlay">
     <div class="pin-box">
-      <h2>🍪 Mom's Recipe Box</h2>
-      <p>Enter the family PIN to view recipes</p>
+      <h2>🍪 Mom's Recipes</h2>
+      <p>Enter the family PIN</p>
       <input type="password" 
              class="pin-input" 
              id="pinInput" 
@@ -26,21 +27,30 @@
   </div>
 
   <div class="container">
-    <header>
-      <h1>🍪 Mom's Recipe Box</h1>
-      <p class="subtitle">Christmas Favorites from Barb Creamer's Kitchen</p>
+    <!-- Compact Header -->
+    <header class="site-header">
+      <h1>Mom's Recipes</h1>
+      <p class="subtitle">Victoria Vandenlangeberg's Kitchen</p>
     </header>
     
-    <div class="actions">
-      <button class="btn btn-secondary" id="shoppingBtn" disabled>
-        🛒 Shopping List (<span id="selectedCount">0</span>)
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button class="btn btn-secondary btn--sm" id="shoppingBtn" disabled>
+        🛒 List (<span id="selectedCount">0</span>)
       </button>
-      <button class="btn" id="selectAllBtn">Select All</button>
-      <a href="admin.html" class="btn" style="text-decoration: none;">📸 Add Recipe</a>
+      <button class="btn btn--sm" id="selectAllBtn">Select All</button>
+      <a href="admin.html" class="btn btn--sm">📸 Add</a>
     </div>
     
+    <!-- Category Filters -->
+    <div class="filters" id="filtersContainer">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <!-- Filters populated by JS -->
+    </div>
+    
+    <!-- Recipe Grid -->
     <div class="recipe-grid" id="recipeGrid">
-      <div class="loading-text">Loading recipes</div>
+      <div class="loading-text">Loading recipes...</div>
     </div>
   </div>
   
@@ -57,7 +67,7 @@
   
   <!-- Recipe Detail Modal -->
   <div class="modal-overlay" id="recipeModalOverlay">
-    <div class="recipe-modal">
+    <div class="modal recipe-modal">
       <div class="modal-header">
         <h2 id="recipeModalTitle">Recipe</h2>
         <button class="close-btn" id="closeRecipeModal">&times;</button>

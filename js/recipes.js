@@ -2,7 +2,9 @@
 // Used by index.html
 
 let recipes = [];
+let filteredRecipes = [];
 let selectedRecipes = new Set();
+let currentFilter = 'all';
 
 // Load recipes from database
 async function loadRecipes() {
@@ -25,40 +27,89 @@ async function loadRecipes() {
       imageUrl: r.original_image_url
     }));
     
+    filteredRecipes = [...recipes];
+    populateFilters();
     renderRecipes();
   } catch (err) {
     console.error('Error loading recipes:', err);
     document.getElementById('recipeGrid').innerHTML = `
       <div class="error-message">
         <p>Could not load recipes.</p>
-        <p style="font-size: 0.9rem; margin-top: 10px;">Please check your connection and try again.</p>
+        <p class="text-muted mt-sm">Check your connection and try again.</p>
       </div>
     `;
   }
+}
+
+// Populate filter buttons based on sources
+function populateFilters() {
+  const sources = new Set();
+  recipes.forEach(r => {
+    if (r.from) sources.add(r.from);
+  });
+  
+  const container = document.getElementById('filtersContainer');
+  if (!container) return;
+  
+  // Keep "All" button, add source filters
+  let html = '<button class="filter-btn active" data-filter="all">All</button>';
+  
+  // Sort sources alphabetically
+  const sortedSources = Array.from(sources).sort();
+  sortedSources.forEach(source => {
+    // Shorten long names for the button
+    const shortName = source.split(' ')[0]; // Just first name
+    html += `<button class="filter-btn" data-filter="${escapeAttr(source)}">${escapeHtml(shortName)}</button>`;
+  });
+  
+  container.innerHTML = html;
+  
+  // Attach click handlers
+  container.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active state
+      container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Apply filter
+      currentFilter = btn.dataset.filter;
+      applyFilter();
+    });
+  });
+}
+
+// Apply current filter
+function applyFilter() {
+  if (currentFilter === 'all') {
+    filteredRecipes = [...recipes];
+  } else {
+    filteredRecipes = recipes.filter(r => r.from === currentFilter);
+  }
+  renderRecipes();
 }
 
 // Render recipe cards
 function renderRecipes() {
   const grid = document.getElementById('recipeGrid');
   
-  if (recipes.length === 0) {
-    grid.innerHTML = '<div class="loading-text">No recipes yet!</div>';
+  if (filteredRecipes.length === 0) {
+    grid.innerHTML = '<div class="loading-text">No recipes found</div>';
     return;
   }
   
-  grid.innerHTML = recipes.map(recipe => `
+  grid.innerHTML = filteredRecipes.map(recipe => `
     <div class="recipe-card ${selectedRecipes.has(recipe.id) ? 'selected' : ''}" 
          data-id="${recipe.id}">
       <div class="card-header">
         <div>
           <h2>${escapeHtml(recipe.name)}</h2>
-          <div class="from">From ${escapeHtml(recipe.from || 'the family')}</div>
+          ${recipe.from ? `<div class="from">From ${escapeHtml(recipe.from)}</div>` : ''}
         </div>
         <div class="checkbox"></div>
       </div>
       <div class="card-preview">
         <p>${escapeHtml(recipe.preview || '')}</p>
-        <p class="expand-hint">👆 Tap to view full recipe</p>
+        <p class="expand-hint">Tap for full recipe</p>
       </div>
     </div>
   `).join('');
@@ -88,9 +139,9 @@ function openRecipeModal(id) {
   
   document.getElementById('recipeModalTitle').textContent = recipe.name;
   document.getElementById('recipeModalBody').innerHTML = `
-    <p class="from-line">From the kitchen of ${escapeHtml(recipe.from || 'the family')}</p>
+    ${recipe.from ? `<p class="from-line">From ${escapeHtml(recipe.from)}</p>` : ''}
     
-    ${recipe.imageUrl ? `<img src="${recipe.imageUrl}" alt="Original recipe card" style="max-width: 100%; border-radius: 12px; margin-bottom: 20px;">` : ''}
+    ${recipe.imageUrl ? `<img src="${recipe.imageUrl}" alt="Original recipe card" style="max-width: 100%; border-radius: 8px; margin-bottom: 16px;">` : ''}
     
     <h3>📝 Ingredients</h3>
     <ul>
@@ -102,7 +153,7 @@ function openRecipeModal(id) {
       ${directions.map(d => `<li>${escapeHtml(d)}</li>`).join('')}
     </ol>
     
-    ${recipe.tip ? `<div class="recipe-tip"><strong>💡 Mom's Tip:</strong> ${escapeHtml(recipe.tip)}</div>` : ''}
+    ${recipe.tip ? `<div class="recipe-tip"><strong>💡 Tip:</strong> ${escapeHtml(recipe.tip)}</div>` : ''}
   `;
   
   document.getElementById('recipeModalOverlay').classList.add('active');
@@ -124,15 +175,15 @@ function updateUI() {
   document.getElementById('selectedCount').textContent = count;
   document.getElementById('shoppingBtn').disabled = count === 0;
   document.getElementById('selectAllBtn').textContent = 
-    count === recipes.length ? 'Deselect All' : 'Select All';
+    count === filteredRecipes.length && count > 0 ? 'Deselect All' : 'Select All';
 }
 
-// Select/deselect all
+// Select/deselect all (in current filter)
 function toggleSelectAll() {
-  if (selectedRecipes.size === recipes.length) {
+  if (selectedRecipes.size === filteredRecipes.length) {
     selectedRecipes.clear();
   } else {
-    recipes.forEach(r => selectedRecipes.add(r.id));
+    filteredRecipes.forEach(r => selectedRecipes.add(r.id));
   }
   renderRecipes();
 }
@@ -143,6 +194,12 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+// Escape attribute value
+function escapeAttr(text) {
+  if (!text) return '';
+  return text.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 // Close modal handlers
@@ -157,4 +214,3 @@ function initModalHandlers() {
     }
   });
 }
-

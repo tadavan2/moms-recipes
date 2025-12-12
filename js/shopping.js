@@ -3,7 +3,9 @@
 
 // Generate shopping list from selected recipes
 function generateShoppingList() {
-  const selected = recipes.filter(r => selectedRecipes.has(r.id));
+  // Use all recipes (not just filtered) for shopping list
+  const allRecipes = typeof recipes !== 'undefined' ? recipes : [];
+  const selected = allRecipes.filter(r => selectedRecipes.has(r.id));
   const combined = {};
 
   selected.forEach(recipe => {

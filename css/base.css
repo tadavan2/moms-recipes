@@ -1,0 +1,241 @@
+/* Mom's Recipe Box - Base Styles */
+/* Typography, colors, resets, utilities */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ==================== RESET & BASE ==================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Colors */
+  --cream: #fef9f3;
+  --cream-dark: #f5ebe0;
+  --cream-darker: #efe4d4;
+  --brown-dark: #3d2a1f;
+  --brown: #5c4033;
+  --brown-light: #8b4513;
+  --brown-text: #4a3728;
+  --brown-muted: #8b7355;
+  --gold: #b8860b;
+  --gold-dark: #daa520;
+  --red: #c41e3a;
+  --red-dark: #8b0000;
+  --green: #2e8b57;
+  --green-dark: #1a5235;
+  --white: #fffcf7;
+  
+  /* Typography */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream-darker) 100%);
+  min-height: 100vh;
+  padding: var(--space-md);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--brown-text);
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.1rem; }
+
+/* ==================== LAYOUT ==================== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.container--narrow {
+  max-width: 600px;
+}
+
+.hidden { display: none !important; }
+
+/* ==================== UTILITIES ==================== */
+.text-center { text-align: center; }
+.text-muted { color: var(--brown-muted); }
+.text-italic { font-style: italic; }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 3px 10px rgba(196, 30, 58, 0.25);
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.35);
+}
+
+.btn:disabled {
+  background: #bbb;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn--full { width: 100%; }
+.btn--sm { 
+  padding: 8px 14px; 
+  font-size: 0.85rem;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  box-shadow: 0 3px 10px rgba(46, 139, 87, 0.25);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 4px 15px rgba(46, 139, 87, 0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--brown-light);
+  color: var(--brown-light);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: var(--brown-light);
+  color: white;
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.2);
+  box-shadow: none;
+  font-weight: 400;
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* ==================== FORMS ==================== */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--brown);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #d4c4b0;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--brown-light);
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ==================== STATUS MESSAGES ==================== */
+.status {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.status.loading { background: #e3f2fd; color: #1565c0; }
+.status.success { background: #e8f5e9; color: #2e7d32; }
+.status.error { background: #ffebee; color: #c62828; }
+
+.loading-text {
+  text-align: center;
+  padding: 40px;
+  color: var(--brown-muted);
+}
+
+.error-message {
+  text-align: center;
+  padding: 30px;
+  color: var(--red);
+  background: #fff0f0;
+  border-radius: var(--radius-md);
+}
+
+/* ==================== PRINT ==================== */
+@media print {
+  body { background: white; padding: 0; }
+  .btn, .actions, .filters { display: none; }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 480px) {
+  body { 
+    padding: 10px; 
+    font-size: 15px;
+  }
+  h1 { font-size: 1.5rem; }
+  .btn { 
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+

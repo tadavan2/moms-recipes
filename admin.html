@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Upload - Mom's Recipe Box</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Add Recipe - Mom's Recipes</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
   <!-- PIN Entry -->
   <div class="pin-overlay" id="pinOverlay">
     <div class="pin-box">
-      <h2>🔐 Admin Access</h2>
+      <h2>🔐 Recipe Upload</h2>
       <p>Enter the family PIN</p>
       <input type="password" class="pin-input" id="pinInput" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••">
       <div class="pin-error" id="pinError"></div>
@@ -19,36 +20,36 @@
   </div>
 
   <div class="container container--narrow">
-    <a href="index.html" class="back-link">← Back to Recipe Box</a>
+    <a href="index.html" class="back-link">← Back to Recipes</a>
     
-    <header class="header--dark">
-      <h1>📸 Upload Recipe Card</h1>
-      <p class="subtitle">Take a photo of a handwritten recipe card</p>
+    <header class="site-header site-header--dark">
+      <h1>📸 Add Recipe</h1>
+      <p class="subtitle">Upload a recipe card photo</p>
     </header>
     
     <!-- Step 1: Upload -->
     <div class="card" id="step1">
       <h2><span class="step-number">1</span> Upload Photo(s)</h2>
-      <p style="margin-bottom: 16px; color: #8b7355; font-size: 0.95rem;">
-        Works with handwritten cards, printed recipes, or emails with notes!
+      <p class="text-muted mb-md" style="font-size: 0.9rem;">
+        Works with handwritten cards, printed recipes, or emails!
       </p>
       
       <!-- Front side -->
       <div class="upload-area" id="uploadArea">
         <input type="file" id="imageInput" accept="image/*" capture="environment">
         <div class="upload-icon">📷</div>
-        <p class="upload-text">Tap to take photo or choose file</p>
+        <p class="upload-text">Tap to take photo</p>
       </div>
       
       <!-- Back side (optional) -->
-      <div id="backSideSection" class="hidden" style="margin-top: 16px;">
-        <p style="margin-bottom: 8px; color: #5c4033; font-weight: bold; font-size: 0.95rem;">
-          📄 Two-sided card? Add the back:
+      <div id="backSideSection" class="hidden mt-md">
+        <p class="text-muted mb-sm" style="font-size: 0.9rem; font-weight: 600;">
+          Two-sided card? Add the back:
         </p>
-        <div class="upload-area" id="uploadAreaBack" style="padding: 24px 16px;">
+        <div class="upload-area" id="uploadAreaBack" style="padding: 20px;">
           <input type="file" id="imageInputBack" accept="image/*" capture="environment">
           <div class="upload-icon" style="font-size: 2rem;">🔄</div>
-          <p class="upload-text" style="font-size: 0.95rem;">Tap to add back side (optional)</p>
+          <p class="upload-text" style="font-size: 0.9rem;">Add back side (optional)</p>
         </div>
       </div>
     </div>
@@ -56,7 +57,7 @@
     <!-- Step 2: Process -->
     <div class="card hidden" id="step2">
       <h2><span class="step-number">2</span> Read Recipe</h2>
-      <p style="margin-bottom: 20px; color: #8b7355;">Claude AI will read the handwriting and extract the recipe.</p>
+      <p class="text-muted mb-md">Claude AI will read and extract the recipe.</p>
       <button class="btn btn--full" id="processBtn">🤖 Read with Claude</button>
       <div class="status hidden" id="processStatus"></div>
     </div>
@@ -64,7 +65,7 @@
     <!-- Step 3: Review & Save -->
     <div class="card hidden" id="step3">
       <h2><span class="step-number">3</span> Review & Save</h2>
-      <p style="margin-bottom: 20px; color: #8b7355;">Check the extracted recipe and fix any mistakes.</p>
+      <p class="text-muted mb-md">Check the recipe and fix any mistakes.</p>
       
       <form id="recipeForm">
         <div class="form-group">
@@ -79,7 +80,7 @@
         
         <div class="form-group">
           <label for="recipePreview">Short Description</label>
-          <input type="text" id="recipePreview" placeholder="One sentence about what this makes">
+          <input type="text" id="recipePreview" placeholder="One sentence about this recipe">
         </div>
         
         <div class="form-group">
@@ -95,8 +96,8 @@
         </div>
         
         <div class="form-group">
-          <label for="recipeTip">Mom's Tip (optional)</label>
-          <textarea id="recipeTip" placeholder="Any special notes or tips"></textarea>
+          <label for="recipeTip">Tip (optional)</label>
+          <textarea id="recipeTip" placeholder="Any special notes"></textarea>
         </div>
         
         <button type="submit" class="btn btn-secondary btn--full">💾 Save Recipe</button>
@@ -107,10 +108,10 @@
     
     <!-- Success -->
     <div class="card hidden" id="successCard">
-      <h2 style="color: #2e8b57;">✅ Recipe Saved!</h2>
-      <p style="margin: 20px 0;">The recipe has been added to Mom's Recipe Box.</p>
-      <button class="btn btn--full" id="addAnother">📸 Add Another Recipe</button>
-      <a href="index.html" class="btn btn-outline btn--full" style="display: block; text-align: center; margin-top: 15px; text-decoration: none;">View Recipe Box</a>
+      <h2 style="color: var(--green);">✅ Recipe Saved!</h2>
+      <p class="text-muted mt-sm mb-md">Added to the recipe box.</p>
+      <button class="btn btn--full" id="addAnother">📸 Add Another</button>
+      <a href="index.html" class="btn btn-outline btn--full mt-sm" style="display: block; text-align: center;">View Recipes</a>
     </div>
   </div>
 
@@ -120,10 +121,7 @@
   <script src="js/auth.js"></script>
   <script src="js/admin.js"></script>
   <script>
-    // Initialize the admin page
-    initAuth(function() {
-      // Page ready after auth
-    });
+    initAuth(function() {});
     initAdminHandlers();
   </script>
 </body>
