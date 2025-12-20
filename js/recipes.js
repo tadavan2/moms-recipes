@@ -9,7 +9,7 @@ let currentFilter = 'all';
 // Load recipes from database
 async function loadRecipes() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('recipes')
       .select('*')
       .order('name');

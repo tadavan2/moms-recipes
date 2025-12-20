@@ -117,7 +117,7 @@ async function uploadImageToStorage(imageBlob, suffix = '') {
   
   const fileName = `${Date.now()}${suffix}.jpg`;
   
-  const { data, error } = await supabase.storage
+  const { data, error } = await supabaseClient.storage
     .from(STORAGE_BUCKET)
     .upload(fileName, imageBlob, {
       contentType: 'image/jpeg',
@@ -130,7 +130,7 @@ async function uploadImageToStorage(imageBlob, suffix = '') {
   }
   
   // Get public URL
-  const { data: urlData } = supabase.storage
+  const { data: urlData } = supabaseClient.storage
     .from(STORAGE_BUCKET)
     .getPublicUrl(fileName);
   
@@ -313,7 +313,7 @@ async function saveRecipe(e) {
   };
   
   try {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('recipes')
       .insert([recipe]);
     
